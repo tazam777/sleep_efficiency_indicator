@@ -1,16 +1,17 @@
 ### Running the Program:
 
 1. **Setup Environment:**
+   - Make sure first you run the python nodebook entirely with updated dataset so that model is created in your local repo as that is important for our backend to run
    - Make sure you have Python installed on your system.
    - Install Flask and other required dependencies. You can do this using pip:
      ```bash
      pip install Flask joblib pandas
      ```
 
-2. **Download the Model:**
+3. **Download the Model:**
    - Make sure you have the trained model file (`best_svm_model.pkl`) available in the same directory as your Flask application.
 
-3. **Run the Flask Application:**
+4. **Run the Flask Application:**
    - Save the provided code in a Python file, for example, `app.py`.
    - Open a terminal or command prompt.
    - Navigate to the directory containing `app.py`.
