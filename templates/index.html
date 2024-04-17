@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sleep Quality Predictor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        label {
+            margin-top: 10px;
+            display: block;
+            font-weight: bold;
+        }
+        select, input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+        select:focus, input:focus {
+            border-color: #007bff;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e2e3e5;
+            border: 1px solid #d3d4d5;
+            border-radius: 4px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sleep Quality Predictor</h1>
+    <form id="sleepForm">
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select><br>
+
+        <label for="age_group">Age Group:</label>
+        <select id="age_group" name="age_group">
+            <option value="Aged Adult">Aged Adult</option>
+            <option value="Child">Child</option>
+            <option value="Middle-Aged Adult">Middle-Aged Adult</option>
+            <option value="Senior">Senior</option>
+            <option value="Teenager">Teenager</option>
+            <option value="Young Adult">Young Adult</option>
+        </select><br>
+
+        <label for="smoking_status">Smoking Status:</label>
+        <select id="smoking_status" name="smoking_status">
+            <option value="No">No</option>
+            <option value="Yes">Yes</option>
+        </select><br>
+
+        <label for="sleep_duration">Sleep Duration (in hours):</label>
+        <input type="number" id="sleep_duration" name="sleep_duration" min="0" max="24" required><br>
+
+        <label for="rem_sleep_percentage">REM Sleep Percentage:</label>
+        <input type="number" id="rem_sleep_percentage" name="rem_sleep_percentage" min="0" max="100" required><br>
+
+        <label for="deep_sleep_percentage">Deep Sleep Percentage:</label>
+        <input type="number" id="deep_sleep_percentage" name="deep_sleep_percentage" min="0" max="100" required><br>
+
+        <label for="light_sleep_percentage">Light Sleep Percentage:</label>
+        <input type="number" id="light_sleep_percentage" name="light_sleep_percentage" min="0" max="100" required><br>
+
+        <label for="awakenings">Number of Awakenings:</label>
+        <input type="number" id="awakenings" name="awakenings" min="0" required><br>
+
+        <label for="caffeine_consumption">Caffeine Consumption (servings):</label>
+        <input type="number" id="caffeine_consumption" name="caffeine_consumption" min="0" required><br>
+
+        <label for="alcohol_consumption">Alcohol Consumption (servings):</label>
+        <input type="number" id="alcohol_consumption" name="alcohol_consumption" min="0" required><br>
+
+        <label for="exercise_frequency">Exercise Frequency (times per week):</label>
+        <input type="number" id="exercise_frequency" name="exercise_frequency" min="0" required><br>
+
+        <label for="caffeine_cup">Caffeine Cup (cups):</label>
+        <input type="number" id="caffeine_cup" name="caffeine_cup" min="0" required><br>
+
+        <button type="button" onclick="submitData()">Predict Sleep Quality</button>
+    </form>
+    <div id="result"></div>
+
+    <script>
+        function submitData() {
+            const button = document.querySelector('button');
+            const resultDiv = document.getElementById('result');
+            button.disabled = true;
+            resultDiv.innerHTML = 'Loading...';
+            const formData = {
+                "Gender": document.getElementById('gender').value,
+                "Age_Group": document.getElementById('age_group').value,
+                "Smoking status": document.getElementById('smoking_status').value,
+                "Sleep duration": parseInt(document.getElementById('sleep_duration').value),
+                "REM sleep percentage": parseInt(document.getElementById('rem_sleep_percentage').value),
+                "Deep sleep percentage": parseInt(document.getElementById('deep_sleep_percentage').value),
+                "Light sleep percentage": parseInt(document.getElementById('light_sleep_percentage').value),
+                "Awakenings": parseInt(document.getElementById('awakenings').value),
+                "Caffeine consumption": parseInt(document.getElementById('caffeine_consumption').value),
+                "Alcohol consumption": parseInt(document.getElementById('alcohol_consumption').value),
+                "Exercise frequency": parseInt(document.getElementById('exercise_frequency').value),
+                "Caffeine cup": parseInt(document.getElementById('caffeine_cup').value)
+            };
+    
+            fetch('/predict', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(formData),
+            })
+            .then(response => response.json())
+            .then(data => {
+                resultDiv.innerHTML = 'Prediction: ' + data.prediction;
+                button.disabled = false;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                resultDiv.innerHTML = 'Error in making prediction';
+                button.disabled = false;
+            });
+        }
+    </script>
+</body>
+</html>
