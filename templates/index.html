@@ -4,61 +4,69 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sleep Quality Predictor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f4f4f9;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #F0F4F8;
             color: #333;
         }
         form {
-            background: white;
+            background: #FFFFFF;
             padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: auto;
         }
         label {
-            margin-top: 10px;
+            margin-top: 15px;
             display: block;
-            font-weight: bold;
+            font-weight: 500;
+            color: #555;
         }
         select, input {
             width: 100%;
-            padding: 8px;
-            margin-top: 5px;
-            border-radius: 4px;
+            padding: 12px;
+            margin-top: 8px;
+            border-radius: 6px;
             border: 1px solid #ccc;
             box-sizing: border-box;
             transition: border-color 0.3s;
         }
         select:focus, input:focus {
-            border-color: #007bff;
+            border-color: #106CC8;
         }
         button {
-            background-color: #007bff;
+            background-color: #106CC8;
             color: white;
-            padding: 10px 20px;
+            padding: 12px 25px;
             border: none;
-            border-radius: 4px;
+            border-radius: 6px;
             cursor: pointer;
-            margin-top: 20px;
+            display: block;
+            margin-top: 25px;
+            width: 100%;
             transition: background-color 0.3s;
         }
         button:hover {
-            background-color: #0056b3;
+            background-color: #0D5498;
         }
         #result {
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #e2e3e5;
-            border: 1px solid #d3d4d5;
-            border-radius: 4px;
+            margin-top: 25px;
+            padding: 15px;
+            background-color: #FAFAFA;
+            border: 1px solid #ccc;
+            border-radius: 6px;
             color: #333;
+            text-align: center;
         }
     </style>
 </head>
 <body>
-    <h1>Sleep Quality Predictor</h1>
+    <h1 style="text-align:center; margin-bottom: 20px;">Sleep Quality Predictor</h1>
     <form id="sleepForm">
         <label for="gender">Gender:</label>
         <select id="gender" name="gender">
